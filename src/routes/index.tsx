@@ -1,19 +1,23 @@
-import { NavigationContainer} from '@react-navigation/native';
-import {AppRoutes} from './app.routes';
-import {SignIn} from '../screens/SignIn'
-import {useAuth} from '../hooks/useAuth';
-import React from 'react';
-import { Box } from 'native-base';
+import { Box } from 'native-base'
+import { NavigationContainer } from '@react-navigation/native'
 
-export function Routes(){
+import { AppRoutes } from './app.routes'
+import { SignIn } from '../screens/SignIn'
+import { useAuth } from '../hooks/useAuth'
 
-    const {user} = useAuth();
+export function Routes() {
+  const { user } = useAuth()
 
-    return(
-        <Box flex={1} bg="gray.900">
-            <NavigationContainer>
-                {user.name ? <AppRoutes/> : <SignIn/>   } 
-            </NavigationContainer>
-        </Box>
-    )
+  return (
+    <Box flex={1} bg="gray.900">
+      <NavigationContainer>
+        {user.name === undefined ?
+          <SignIn />
+          :
+          <AppRoutes />
+        }
+
+      </NavigationContainer>
+    </Box>
+  )
 }
